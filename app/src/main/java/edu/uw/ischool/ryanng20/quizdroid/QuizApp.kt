@@ -12,5 +12,6 @@ class QuizApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Log.i(TAG, "QuizApp Loaded")
+        topicRepository = TopicRepositoryStorage(this)
     }
 }

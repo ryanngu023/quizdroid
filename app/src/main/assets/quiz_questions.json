@@ -2,6 +2,8 @@
   "topics": [
     {
       "name": "Math",
+      "shortDescription": "A test of math",
+      "longDescription": "Test your math skills on the math quiz.",
       "questions": [
         {
           "question": "2x + 2 = 0. What is x?",
@@ -17,6 +19,8 @@
     },
     {
       "name": "Physics",
+      "shortDescription": "A test of physics",
+      "longDescription": "Test your physics skills on the physics quiz.",
       "questions": [
         {
           "question": "What is the formula for Force?",
@@ -32,6 +36,8 @@
     },
     {
       "name": "Marvel Super Heroes",
+      "shortDescription": "A test of Marvel Knowledge",
+      "longDescription": "Test your knowledge on Marvel on this Marvel Super Heroes Quiz.",
       "questions": [
         {
           "question": "Who can turn green when angry?",
