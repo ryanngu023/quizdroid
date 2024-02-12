@@ -12,7 +12,7 @@ import java.io.InputStream
 
 class TopicOverviewActivity : AppCompatActivity() {
 
-    private lateinit var json: JSONObject
+
 
     private val TAG: String = "TopicsOverviewActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,30 +26,31 @@ class TopicOverviewActivity : AppCompatActivity() {
         val topicDesc = findViewById<TextView>(R.id.quizdescriptor)
         val topicQuestions = findViewById<TextView>(R.id.questioncount)
         val startBtn = findViewById<Button>(R.id.startquiz)
+        var questionNum = 1
         topicTitle.text = "$topic Quiz"
         topicDesc.text = desc
 
-        try {
-            val inputStream: InputStream = assets.open("quiz_questions.json")
-            val jsonString = inputStream.bufferedReader().use { it.readText() }
-            val json = JSONObject(jsonString)
-            val quizTopics = json.getJSONArray("topics")
 
-            for(i in 0..<quizTopics.length()) {
-                val item = quizTopics.getJSONObject(i)
-                if(item.getString("name") == topic) {
-                    topicQuestions.text = "Total Questions: ${item.getJSONArray("questions").length()}"
-                }
+        val inputStream: InputStream = assets.open("quiz_questions.json")
+        val jsonString = inputStream.bufferedReader().use { it.readText() }
+        val json = JSONObject(jsonString)
+        val quizTopics = json.getJSONArray("topics")
+
+        for(i in 0..<quizTopics.length()) {
+            val item = quizTopics.getJSONObject(i)
+            if(item.getString("name") == topic) {
+                questionNum = item.getJSONArray("questions").length()
+                topicQuestions.text = "Total Questions: ${questionNum}"
             }
-
-        } catch (e: Exception) {
-            Log.i(TAG, "file read failed")
         }
+
 
         startBtn.setOnClickListener {
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtra("topic", topic)
-            intent.putExtra("json", json.toString())
+            intent.putExtra("questionNum", questionNum)
+            intent.putExtra("incorrect", 0)
+            intent.putExtra("numCorrect", 0)
             startActivity(intent)
         }
     }

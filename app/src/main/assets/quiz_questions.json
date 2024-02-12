@@ -21,7 +21,7 @@
         {
           "question": "What is the formula for Force?",
           "answers": ["E=mc^2", "y=mx + b", "N=1/n(x)", "F=ma"],
-          "correctAnswer": 1
+          "correctAnswer": 4
         },
         {
           "question": "Which of Newton's law states for every action, there is an equal and opposite reaction?",

@@ -6,4 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".QuestionActivity">
 
+    <TextView
+        android:id="@+id/questiontitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.150" />
+    
+    <RadioGroup
+        android:id="@+id/answer_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/questiontitle"
+        app:layout_constraintVertical_bias="0.350">
+
+        <RadioButton
+            android:id="@+id/first_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="first answer"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/second_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="second answer"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/third_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="third answer"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/fourth_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fourth answer"
+            android:textSize="22sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/answer_radio_group"
+        app:layout_constraintVertical_bias="0.550" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
