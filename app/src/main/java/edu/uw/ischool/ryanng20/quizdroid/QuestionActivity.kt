@@ -15,8 +15,9 @@ import java.io.InputStream
 
 class QuestionActivity : AppCompatActivity() {
 
+    private lateinit var quizApp: QuizApp
+    private lateinit var topicRepository: TopicRepository
     private val TAG: String = "QuestionActivity"
-    private lateinit var questionsArray: JSONArray
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
@@ -28,39 +29,22 @@ class QuestionActivity : AppCompatActivity() {
         val thirdchoice = findViewById<RadioButton>(R.id.third_choice)
         val fourthchoice = findViewById<RadioButton>(R.id.fourth_choice)
         val submitBtn = findViewById<Button>(R.id.submit)
-        questionsArray = JSONArray()
-        submitBtn.isEnabled = false;
+        quizApp = application as QuizApp
+        topicRepository = quizApp.topicRepository
         val topic = intent.getStringExtra("topic")
         Log.i(TAG, "Topic: ${topic}")
-        val inputStream: InputStream = assets.open("quiz_questions.json")
-        val jsonString = inputStream.bufferedReader().use { it.readText() }
-        val json = JSONObject(jsonString)
-        val quizTopics = json.getJSONArray("topics")
-        val numCorrect = intent.getIntExtra("numCorrect", 0)
-        val numIncorrect = intent.getIntExtra("incorrect", 0)
+        val topicsList = topicRepository.getAllTopics()
+        val currTopic = topicsList.find { it.title == topic }
+        submitBtn.isEnabled = false;
 
-        Log.i(TAG, numCorrect.toString())
-        Log.i(TAG, numIncorrect.toString())
-
-        for (i in 0..<quizTopics.length()) {
-            val item = quizTopics.getJSONObject(i)
-            if (item.getString("name") == topic) {
-                questionsArray = item.getJSONArray("questions")
-                Log.i(TAG, questionsArray.toString())
-                break
-            }
-        }
-        val questionNum = intent.getIntExtra("questionNum", 1)
-
-        Log.i(TAG, "At mod: ${questionsArray.toString()}")
-        val current = questionsArray.getJSONObject(questionNum - 1)
-        Log.i(TAG, current.toString())
-        questionTitle.text = current.getString("question")
-        val options = current.getJSONArray("answers")
-        firstchoice.text = options.getString(0)
-        secondchoice.text = options.getString(1)
-        thirdchoice.text = options.getString(2)
-        fourthchoice.text = options.getString(3)
+        val questionsArray = currTopic!!.questions
+        val currQuestion = questionsArray[quizApp.questionNumber - 1]
+        questionTitle.text = currQuestion.question
+        val options = currQuestion.answers
+        firstchoice.text = options[0]
+        secondchoice.text = options[1]
+        thirdchoice.text = options[2]
+        fourthchoice.text = options[3]
 
         var selectedIndex = -1
         radioGroup.setOnCheckedChangeListener { _, selected ->
@@ -71,14 +55,9 @@ class QuestionActivity : AppCompatActivity() {
         }
 
         submitBtn.setOnClickListener {
-            val correctIdx = current.getInt("correctAnswer")
             val intent = Intent(this, AnswerActivity::class.java)
-            intent.putExtra("correct", (selectedIndex == correctIdx))
-            intent.putExtra("selected", options.getString(selectedIndex))
-            intent.putExtra("correctAns", options.getString(correctIdx))
-            intent.putExtra("questionNum", questionNum)
-            intent.putExtra("incorrect", numIncorrect)
-            intent.putExtra("numCorrect", numCorrect)
+            intent.putExtra("correct", (selectedIndex == currQuestion.correctAnsIndex))
+            intent.putExtra("selected", selectedIndex)
             intent.putExtra("topic", topic)
             startActivity(intent)
         }

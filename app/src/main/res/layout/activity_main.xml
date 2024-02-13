@@ -30,6 +30,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
+    <TextView
+        android:id="@+id/mathsubtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Math quiz"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/physics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/math"
+        app:layout_constraintVertical_bias="0.4" />
+
 
     <Button
         android:id="@+id/physics"
@@ -40,8 +53,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/math"
+        app:layout_constraintTop_toTopOf="@+id/mathsubtext"
         app:layout_constraintVertical_bias="0.150" />
+    <TextView
+        android:id="@+id/physicssubtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="physics quiz"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/marvel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/physics"
+        app:layout_constraintVertical_bias="0.45" />
 
     <Button
         android:id="@+id/marvel"
@@ -52,7 +77,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/physics"
+        app:layout_constraintTop_toTopOf="@+id/physicssubtext"
         app:layout_constraintVertical_bias="0.175" />
+
+    <TextView
+        android:id="@+id/marvelsubtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="marvel quiz"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/marvel"
+        app:layout_constraintVertical_bias="0.25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
