@@ -8,6 +8,9 @@ class QuizApp : Application() {
     var correctCount: Int = 0
     var totalQuestions: Int = 0
     var questionNumber: Int = 1
+    lateinit var url: String
+    var duration: Int = 0
+    lateinit var currTopic: Topic
 
     lateinit var topicRepository: TopicRepository
     override fun onCreate() {
@@ -26,5 +29,14 @@ class QuizApp : Application() {
 
     fun updateTotalQuestions(num: Int) {
         totalQuestions = num
+    }
+
+    fun updateCurrentTopic(topic: Topic) {
+        currTopic = topic
+    }
+
+    fun setQuizSettings(dllUrl: String, dllDuration: Int) {
+        url = dllUrl
+        duration = dllDuration
     }
 }

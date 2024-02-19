@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.util.Log
 import android.widget.TextView
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         val mathDesc = findViewById<TextView>(R.id.mathsubtext)
         val physicsDesc = findViewById<TextView>(R.id.physicssubtext)
         val marvelDesc = findViewById<TextView>(R.id.marvelsubtext)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         mathDesc.text = topicList[0].shortDesc
         physicsDesc.text = topicList[1].shortDesc
         marvelDesc.text = topicList[2].shortDesc
@@ -53,6 +59,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Log.i(TAG, "creating options menu")
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.i(TAG, "${item.title} selected")
+        val intent = Intent(this, PreferencesActivity::class.java)
+        startActivity(intent)
+        return super.onOptionsItemSelected(item)
     }
 
     private fun startTopicOverview(topic: String) {
