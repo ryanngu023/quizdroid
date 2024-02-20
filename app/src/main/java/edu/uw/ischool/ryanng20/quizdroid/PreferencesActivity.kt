@@ -20,6 +20,7 @@ class PreferencesActivity : AppCompatActivity() {
         val inputUrl = findViewById<EditText>(R.id.inputURL)
         val inputDuration = findViewById<EditText>(R.id.inputDuration)
         val saveBtn = findViewById<Button>(R.id.saveBtn)
+        val urlPattern = """^http[s]?://[www]?\w+.([\w+]+)?.?(edu|com|org|net)/?(.+)?(\w+.json)$"""
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -28,8 +29,9 @@ class PreferencesActivity : AppCompatActivity() {
         saveBtn.setOnClickListener {
             val updatedUrl = inputUrl.text.toString()
             val updatedDuration = inputDuration.text.toString()
-            if(!updatedUrl.isEmpty() && !updatedDuration.isEmpty()) {
+            if(updatedUrl.isNotEmpty() && updatedDuration.isNotEmpty() && Regex(urlPattern).matches(updatedUrl)) {
                 quizApp.setQuizSettings(updatedUrl, updatedDuration.toInt())
+                Log.i(TAG, "settings updated")
                 val intent = Intent(this, MainActivity::class.java)
                 Toast.makeText(this, "Settings have been updated", Toast.LENGTH_SHORT).show()
                 quizApp.updateQuestionNumber(1)

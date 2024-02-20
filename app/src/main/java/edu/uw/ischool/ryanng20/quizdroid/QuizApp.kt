@@ -8,15 +8,14 @@ class QuizApp : Application() {
     var correctCount: Int = 0
     var totalQuestions: Int = 0
     var questionNumber: Int = 1
-    lateinit var url: String
-    var duration: Int = 0
-    lateinit var currTopic: Topic
+    var url: String = "https://tednewardsandbox.site44.com/questions.json"
+    var duration: Int = 60
 
     lateinit var topicRepository: TopicRepository
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "QuizApp Loaded")
-        topicRepository = TopicRepositoryStorage(this)
+        topicRepository = TopicRepositoryStorage(this, url)
     }
 
     fun updateCorrectCount(num: Int) {
@@ -31,9 +30,6 @@ class QuizApp : Application() {
         totalQuestions = num
     }
 
-    fun updateCurrentTopic(topic: Topic) {
-        currTopic = topic
-    }
 
     fun setQuizSettings(dllUrl: String, dllDuration: Int) {
         url = dllUrl

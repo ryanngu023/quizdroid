@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <Button
-        android:id="@+id/math"
+        android:id="@+id/firstBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Math"
@@ -43,21 +43,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
     <TextView
-        android:id="@+id/mathsubtext"
+        android:id="@+id/firstBtnSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Math quiz"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/physics"
+        app:layout_constraintBottom_toBottomOf="@+id/secondBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/math"
+        app:layout_constraintTop_toTopOf="@+id/firstBtn"
         app:layout_constraintVertical_bias="0.4" />
 
 
     <Button
-        android:id="@+id/physics"
+        android:id="@+id/secondBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Physics"
@@ -65,23 +65,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mathsubtext"
+        app:layout_constraintTop_toTopOf="@+id/firstBtnSubtitle"
         app:layout_constraintVertical_bias="0.150" />
     <TextView
-        android:id="@+id/physicssubtext"
+        android:id="@+id/secondBtnSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="physics quiz"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/marvel"
+        app:layout_constraintBottom_toBottomOf="@+id/thirdBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/physics"
+        app:layout_constraintTop_toTopOf="@+id/secondBtn"
         app:layout_constraintVertical_bias="0.45" />
 
     <Button
-        android:id="@+id/marvel"
+        android:id="@+id/thirdBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Marvel Super Heroes"
@@ -89,11 +89,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/physicssubtext"
+        app:layout_constraintTop_toTopOf="@+id/secondBtnSubtitle"
         app:layout_constraintVertical_bias="0.175" />
 
     <TextView
-        android:id="@+id/marvelsubtext"
+        android:id="@+id/thirdBtnSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="marvel quiz"
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/marvel"
+        app:layout_constraintTop_toTopOf="@+id/thirdBtn"
         app:layout_constraintVertical_bias="0.25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,6 @@ import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.InputStream
 
 
 class QuestionActivity : AppCompatActivity() {

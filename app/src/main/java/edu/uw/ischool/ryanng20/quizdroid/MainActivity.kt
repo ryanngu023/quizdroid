@@ -9,12 +9,14 @@ import android.widget.TextView
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mathBtn: Button
-    private lateinit var physicsBtn: Button
-    private lateinit var marvelBtn: Button
+    private lateinit var firstBtn: Button
+    private lateinit var secondBtn: Button
+    private lateinit var thirdBtn: Button
     private lateinit var quizApp: QuizApp
     private lateinit var topicRepository: TopicRepository
 
@@ -27,39 +29,53 @@ class MainActivity : AppCompatActivity() {
         quizApp = application as QuizApp
         topicRepository = quizApp.topicRepository
 
-        val topicList = topicRepository.getAllTopics();
 
-        mathBtn = findViewById(R.id.math)
-        physicsBtn = findViewById(R.id.physics)
-        marvelBtn = findViewById(R.id.marvel)
-        val mathDesc = findViewById<TextView>(R.id.mathsubtext)
-        val physicsDesc = findViewById<TextView>(R.id.physicssubtext)
-        val marvelDesc = findViewById<TextView>(R.id.marvelsubtext)
+        firstBtn = findViewById(R.id.firstBtn)
+        secondBtn = findViewById(R.id.secondBtn)
+        thirdBtn = findViewById(R.id.thirdBtn)
+        val firstDesc = findViewById<TextView>(R.id.firstBtnSubtitle)
+        val secondDesc = findViewById<TextView>(R.id.secondBtnSubtitle)
+        val thirdDesc = findViewById<TextView>(R.id.thirdBtnSubtitle)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        val executor: Executor = Executors.newSingleThreadExecutor()
+        executor.execute {
+            topicRepository.downloadTopics(quizApp.url) {
+                if(it) {
+                    Log.i(TAG, topicRepository.getAllTopics().toString())
+                    runOnUiThread {
+                        val topicList = topicRepository.getAllTopics()
+                        Log.i(TAG, topicList.toString())
+                        firstDesc.text = topicList[0].shortDesc
+                        secondDesc.text = topicList[1].shortDesc
+                        thirdDesc.text = topicList[2].shortDesc
+                        firstBtn.text = topicList[0].title
+                        secondBtn.text = topicList[1].title
+                        thirdBtn.text = topicList[2].title
 
-        mathDesc.text = topicList[0].shortDesc
-        physicsDesc.text = topicList[1].shortDesc
-        marvelDesc.text = topicList[2].shortDesc
+                        Log.i(TAG, "Within UI THREAD: $topicList")
+                        firstBtn.setOnClickListener {
+                            Log.i(TAG, "First Clicked")
+                            startTopicOverview(topicList[0].title)
+                        }
+                        secondBtn.setOnClickListener {
+                            Log.i(TAG, "Second Clicked")
+                            startTopicOverview(topicList[1].title)
+                        }
+                        thirdBtn.setOnClickListener {
+                            Log.i(TAG, "Third Clicked")
+                            startTopicOverview(topicList[2].title)
+                        }
 
-        for(i in 0..<topicList.size) {
-            val currTopic = topicList[i]
-            when (currTopic.title) {
-                "Math" -> mathBtn.setOnClickListener {
-                    Log.i(TAG, "Math Clicked")
-                    startTopicOverview(currTopic.title)
-                }
-                "Physics" -> physicsBtn.setOnClickListener {
-                    Log.i(TAG, "Physics Clicked")
-                    startTopicOverview(currTopic.title)
-                }
-                "Marvel Super Heroes" -> marvelBtn.setOnClickListener {
-                    Log.i(TAG, "Marvel Clicked")
-                    startTopicOverview(currTopic.title)
+                    }
+                } else {
+                    // default to data/questions.json
                 }
             }
+
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         Log.i(TAG, "creating options menu")
         menuInflater.inflate(R.menu.toolbar_menu, menu)

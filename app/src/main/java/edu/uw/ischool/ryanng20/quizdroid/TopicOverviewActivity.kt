@@ -28,8 +28,7 @@ class TopicOverviewActivity : AppCompatActivity() {
         val startBtn = findViewById<Button>(R.id.startquiz)
         quizApp = application as QuizApp
         topicRepository = quizApp.topicRepository
-        val topicsList = topicRepository.getAllTopics()
-        val currTopic = topicsList.find { it.title == topic }
+        val currTopic = topicRepository.getTopic(topic.toString())
         quizApp.updateTotalQuestions(currTopic!!.questions.size)
         val questionNum = quizApp.totalQuestions
         topicTitle.text = "${currTopic.title} Quiz"
