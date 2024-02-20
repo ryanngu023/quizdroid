@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 
 
 class QuestionActivity : AppCompatActivity() {
@@ -26,6 +27,8 @@ class QuestionActivity : AppCompatActivity() {
         val thirdchoice = findViewById<RadioButton>(R.id.third_choice)
         val fourthchoice = findViewById<RadioButton>(R.id.fourth_choice)
         val submitBtn = findViewById<Button>(R.id.submit)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
         quizApp = application as QuizApp
         topicRepository = quizApp.topicRepository
         val topic = intent.getStringExtra("topic")

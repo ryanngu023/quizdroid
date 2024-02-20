@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.util.Log
+import androidx.appcompat.widget.Toolbar
 import org.json.JSONObject
 import java.io.InputStream
 
@@ -26,6 +27,8 @@ class TopicOverviewActivity : AppCompatActivity() {
         val topicDesc = findViewById<TextView>(R.id.quizdescriptor)
         val topicQuestions = findViewById<TextView>(R.id.questioncount)
         val startBtn = findViewById<Button>(R.id.startquiz)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
         quizApp = application as QuizApp
         topicRepository = quizApp.topicRepository
         val currTopic = topicRepository.getTopic(topic.toString())

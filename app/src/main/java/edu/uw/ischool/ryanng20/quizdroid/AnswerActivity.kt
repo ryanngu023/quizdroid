@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-
+import androidx.appcompat.widget.Toolbar
 
 
 class AnswerActivity : AppCompatActivity() {
@@ -28,6 +28,8 @@ class AnswerActivity : AppCompatActivity() {
         val currTopic = topicsList.find { it.title == topic }
         val questionsArray = currTopic!!.questions
         val currQuestion = questionsArray[quizApp.questionNumber - 1]
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         val userAnswerText = findViewById<TextView>(R.id.useranswer)
         val correctAnsText = findViewById<TextView>(R.id.correctanswer)
