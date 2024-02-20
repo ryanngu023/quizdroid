@@ -1,6 +1,8 @@
 package edu.uw.ischool.ryanng20.quizdroid
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
 
 class QuizApp : Application() {
@@ -16,7 +18,11 @@ class QuizApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "QuizApp Loaded")
-        topicRepository = TopicRepositoryStorage(url)
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = connectivityManager.activeNetwork
+        if(netInfo != null) {
+            topicRepository = TopicRepositoryStorage(this, url)
+        }
     }
 
     fun updateCorrectCount(num: Int) {

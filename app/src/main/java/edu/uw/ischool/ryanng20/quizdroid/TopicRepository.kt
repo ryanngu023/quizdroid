@@ -1,11 +1,15 @@
 package edu.uw.ischool.ryanng20.quizdroid
 
+import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.FileOutputStream
 import java.io.InputStream
+import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.Executor
@@ -17,10 +21,10 @@ interface TopicRepository {
     fun downloadTopics(url: String, callback: (Boolean) -> Unit)
 }
 
-class TopicRepositoryStorage(url: String) : TopicRepository {
+class TopicRepositoryStorage(context: Context, url: String) : TopicRepository {
     private val TAG: String = "TopicRepositoryStorage"
     private val topics = mutableListOf<Topic>()
-
+    private val context: Context = context
     init {
         Log.i(TAG, "Constructing $TAG")
         downloadTopics(url) {}
@@ -34,6 +38,13 @@ class TopicRepositoryStorage(url: String) : TopicRepository {
             val inputStream: InputStream = connectUrl.inputStream
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             Log.i(TAG, jsonString)
+            try {
+                val outputFile: FileOutputStream = context.openFileOutput("questions.json", Context.MODE_PRIVATE)
+                outputFile.write(jsonString.toByteArray())
+                outputFile.close()
+            } catch (e: Exception) {
+                Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show()
+            }
             try {
                 topics.clear()
                 val json = JSONArray(jsonString)
