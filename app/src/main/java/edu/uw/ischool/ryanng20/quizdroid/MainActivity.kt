@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        val dllCheck = quizApp.dllCheck
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -9,7 +9,7 @@ class QuizApp : Application() {
     var totalQuestions: Int = 0
     var questionNumber: Int = 1
     var url: String = "https://tednewardsandbox.site44.com/questions.json"
-    var duration: Int = 60
+    var dllCheck: Int = 60
 
 
     lateinit var topicRepository: TopicRepository
@@ -32,8 +32,8 @@ class QuizApp : Application() {
     }
 
 
-    fun setQuizSettings(dllUrl: String, dllDuration: Int) {
+    fun setQuizSettings(dllUrl: String, dllCheckIn: Int) {
         url = dllUrl
-        duration = dllDuration
+        dllCheck = dllCheckIn
     }
 }
