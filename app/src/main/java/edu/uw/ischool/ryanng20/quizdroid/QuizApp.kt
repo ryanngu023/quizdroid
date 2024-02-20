@@ -11,11 +11,12 @@ class QuizApp : Application() {
     var url: String = "https://tednewardsandbox.site44.com/questions.json"
     var duration: Int = 60
 
+
     lateinit var topicRepository: TopicRepository
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "QuizApp Loaded")
-        topicRepository = TopicRepositoryStorage(this, url)
+        topicRepository = TopicRepositoryStorage(url)
     }
 
     fun updateCorrectCount(num: Int) {

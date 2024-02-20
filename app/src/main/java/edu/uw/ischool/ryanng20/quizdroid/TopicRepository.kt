@@ -17,10 +17,9 @@ interface TopicRepository {
     fun downloadTopics(url: String, callback: (Boolean) -> Unit)
 }
 
-class TopicRepositoryStorage(context: Context, url: String) : TopicRepository {
+class TopicRepositoryStorage(url: String) : TopicRepository {
     private val TAG: String = "TopicRepositoryStorage"
     private val topics = mutableListOf<Topic>()
-    private val assets = context.assets
 
     init {
         Log.i(TAG, "Constructing $TAG")
@@ -34,6 +33,7 @@ class TopicRepositoryStorage(context: Context, url: String) : TopicRepository {
             val connectUrl = URL(url).openConnection() as HttpURLConnection
             val inputStream: InputStream = connectUrl.inputStream
             val jsonString = inputStream.bufferedReader().use { it.readText() }
+            Log.i(TAG, jsonString)
             try {
                 topics.clear()
                 val json = JSONArray(jsonString)
@@ -69,6 +69,7 @@ class TopicRepositoryStorage(context: Context, url: String) : TopicRepository {
             } catch (e: JSONException) {
                 Log.e(TAG, "invalid JSON input, $e")
                 callback(false)
+                downloadTopics("https://tednewardsandbox.site44.com/questions.json") {}
             }
         }
     }
