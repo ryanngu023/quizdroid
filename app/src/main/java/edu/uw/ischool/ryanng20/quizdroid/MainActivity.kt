@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                             }
 
                         }
-                        Toast.makeText(this, "Data Downloaded from ${quizApp.url}", Toast.LENGTH_SHORT).show()
+
                     } else {
                         val builder = AlertDialog.Builder(this)
                         builder.setTitle("Download Failed")
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             timedExecutor = Executors.newSingleThreadScheduledExecutor()
-            (timedExecutor as ScheduledExecutorService?)?.scheduleAtFixedRate(topicRepository.downloadTopics(quizApp.url){}, 0L, quizApp.dllCheck * 1L, TimeUnit.MINUTES)
+            // (timedExecutor as ScheduledExecutorService?)?.scheduleAtFixedRate(topicRepository.downloadTopics(quizApp.url){}, 0L, quizApp.dllCheck * 1L, TimeUnit.MINUTES)
         }
 
     }
