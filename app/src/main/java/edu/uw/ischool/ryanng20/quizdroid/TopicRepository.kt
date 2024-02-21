@@ -37,7 +37,6 @@ class TopicRepositoryStorage(context: Context, url: String) : TopicRepository {
             val connectUrl = URL(url).openConnection() as HttpURLConnection
             val inputStream: InputStream = connectUrl.inputStream
             val jsonString = inputStream.bufferedReader().use { it.readText() }
-            Log.i(TAG, jsonString)
             try {
                 val outputFile: FileOutputStream = context.openFileOutput("questions.json", Context.MODE_PRIVATE)
                 outputFile.write(jsonString.toByteArray())
